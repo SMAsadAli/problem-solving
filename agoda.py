@@ -18,7 +18,7 @@ def sol(arr):
             arr[-1] = 0
             end_ptr = original_len - 1
             while end_ptr > index:
-                arr[end_ptr], arr[end_ptr - 1] = arr[end_ptr - 1], arr[end_ptr]
+                arr[end_ptr] = arr[end_ptr - 1]
                 end_ptr -= 1
             # print(arr)
             index += 1
@@ -40,16 +40,15 @@ print(sol([1, 0, 1, 0, 1, 7]))
 def stocks_profit(stocks):
     if len(stocks) <= 6:
         return 0
-    m_profit = 0
+    max_value = 0
     cur_profit = 0
     for index in range(len(stocks)-6):
-        profit_array = stocks[index+6:]
-        max_profit = max(profit_array)
+        max_profit = max(stocks[index+6:])
         if max_profit > stocks[index]:
             cur_profit = max_profit - stocks[index]
-        if cur_profit > m_profit:
-            m_profit = cur_profit
-    return m_profit
+        if cur_profit > max_value:
+            max_value = max(cur_profit, max_value)
+    return max_value
 
 # print(stocks_profit([7,1,5,3,6,89,1]))
 # 3+9
